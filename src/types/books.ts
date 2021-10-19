@@ -11,8 +11,8 @@ export interface IBook {
   title: string
   author: string
   publish_date: Array<{
-    UK: Date
-    US: Date
+    UK?: Date
+    US?: Date
   }>
   plot_take_place_years: Array<Date>
   book_covers: Array<IBookCovers>

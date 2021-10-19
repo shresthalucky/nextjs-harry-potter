@@ -1,19 +1,27 @@
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 
-import { getAllCharacters } from '../helpers/api'
 import { ICharacter } from '../types/characters'
+
+import Layout from '../components/Layout'
+import { getAllCharacters } from '../helpers/api'
 import { getCharacterSlug } from '../helpers/slug'
+import CharacterPill from '../components/CharacterCard'
 
 export default function Characters({ characters }) {
-  return characters.map((character: ICharacter) => {
-    const slug = getCharacterSlug(character.name)
-    return (
-      <div key={character.id}>
-        <Link href={`/characters/${slug}`}>{character.name}</Link>
-      </div>
-    )
-  })
+  return (
+    <Layout title="Characters">
+      {characters.map((character: ICharacter) => {
+        const slug = getCharacterSlug(character.name)
+        return (
+          <CharacterPill
+            name={character.name}
+            link={`/characters/${slug}`}
+            key={character.id}
+          />
+        )
+      })}
+    </Layout>
+  )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
