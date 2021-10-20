@@ -160,15 +160,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     'utf8',
   )
 
-  const characterPaths: ICharacterPaths[] = characterIndex.map(character => ({
-    params: {
-      slug: character.slug,
-    },
-  }))
+  // const characterPaths: ICharacterPaths[] = characterIndex.map(character => ({
+  //   params: {
+  //     slug: character.slug,
+  //   },
+  // }))
 
   return {
-    paths: characterPaths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   }
 }
 
@@ -176,11 +176,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await readFile('.characters_index_table', 'utf8')
   const indexTable = JSON.parse(data)
 
-  const { id } = indexTable.find(
+  const row = indexTable.find(
     (row: ICharacterIndex) => row.slug === params.slug,
   )
 
-  const characterData: ICharacter = await getCharacter(id)
+  if (!row) {
+    return {
+      notFound: true,
+    }
+  }
+
+  const characterData: ICharacter = await getCharacter(row.id)
   const books: IBook[] = await getAllBooks()
 
   const booksFeatured = books.filter(book =>
