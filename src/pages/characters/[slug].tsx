@@ -9,7 +9,7 @@ import {
 import { IBook } from '../../types/books'
 
 import Layout from '../../components/Layout'
-import { readFile, writeFile } from '../../helpers/fs'
+import { charactersFile, readFile, writeFile } from '../../helpers/fs'
 import { getCharacterSlug } from '../../helpers/slug'
 import { getAllBooks, getAllCharacters, getCharacter } from '../../helpers/api'
 
@@ -154,11 +154,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }),
   )
 
-  await writeFile(
-    '.characters_index_table',
-    JSON.stringify(characterIndex),
-    'utf8',
-  )
+  await writeFile(charactersFile, JSON.stringify(characterIndex), 'utf8')
 
   // const characterPaths: ICharacterPaths[] = characterIndex.map(character => ({
   //   params: {
@@ -173,7 +169,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await readFile('.characters_index_table', 'utf8')
+  const data = await readFile(charactersFile, 'utf8')
   const indexTable = JSON.parse(data)
 
   const row = indexTable.find(
