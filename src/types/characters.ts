@@ -14,14 +14,3 @@ export interface ICharacter {
   associated_groups: string[]
   books_featured_in: number[]
 }
-
-export interface ICharacterPaths {
-  params: {
-    slug: string
-  }
-}
-
-export interface ICharacterIndex {
-  id: number
-  slug: string
-}

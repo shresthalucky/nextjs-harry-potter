@@ -42,24 +42,26 @@ export default function Book({ bookData, charactersData }: Props) {
             </div>
           ))}
           <table>
-            <tr>
-              <th className="font-bold align-top text-left pr-4">Author: </th>
-              <td>{author}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th className="font-bold align-top text-left pr-4">Author: </th>
+                <td>{author}</td>
+              </tr>
 
-            <tr>
-              <th className="font-bold align-top text-left pr-4">
-                Published Date:{' '}
-              </th>
-              <td>{`${publishDate.UK} (UK) and ${publishDate.US} (US)`}</td>
-            </tr>
+              <tr>
+                <th className="font-bold align-top text-left pr-4">
+                  Published Date:{' '}
+                </th>
+                <td>{`${publishDate.UK} (UK) and ${publishDate.US} (US)`}</td>
+              </tr>
 
-            <tr>
-              <th className="font-bold align-top text-left pr-4">
-                Plot Taken Place:{' '}
-              </th>
-              <td>{`${plot_take_place_years[0]} - ${plot_take_place_years[1]}`}</td>
-            </tr>
+              <tr>
+                <th className="font-bold align-top text-left pr-4">
+                  Plot Taken Place:{' '}
+                </th>
+                <td>{`${plot_take_place_years[0]} - ${plot_take_place_years[1]}`}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
